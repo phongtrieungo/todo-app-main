@@ -1,36 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Todo app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
 </head>
+
 <body>
+  <main class="container">
+    <picture class="head-bg">
+      <source media="(min-width: 1024px)" srcset="./images/bg-desktop-light.jpg">
+      <img src="./images/bg-mobile-light.jpg" alt="Head background" class="w-100">
+    </picture>
 
-  Todo
+    <section class="header-section">
+      <section class="header">
+        <h1 class="text-white letter-spacing">TODO</h1>
+        <img class="text-white" src="./images/icon-moon.svg" alt="Toggle">
+      </section>
 
-  <!-- Add dynamic number --> items left
+      <section class="new-todo-input-wrapper">
+        <span class="circle"></span>
+        <input type="text" name="new-todo" id="new-todo" placeholder="Create a new todo...">
+      </section>
+    </section>
 
-  All
-  Active 
-  Completed
+    <ul class="task-list">
+      <li class="task-list-item">
+        <span class="content">
+          <img src="./images/icon-check.svg" alt="" class="task-check-status">
+          <strike>Complete online JavaScript course</strike>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <img src="./images/icon-check.svg" alt="" class="task-check-status">
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <img src="./images/icon-check.svg" alt="" class="task-check-status">
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+      <li class="task-list-item">
+        <span class="content">
+          <span class="void-circle"></span>
+          <p>Complete online JavaScript course</p>
+        </span>
+        <img src="./images/icon-cross.svg" alt="Remove task">
+      </li>
+    </ul>
 
-  Clear Completed
+    <section class="clear-section">
+      <span>
+        5 items left
+      </span>
+      <span>Clear Completed</span>
+    </section>
 
-  Drag and drop to reorder list
+    <section class="filter-section">
+      <ul class="filter">
+        <li class="item">All</li>
+        <li class="item">Active</li>
+        <li class="item">Completed</li>
+      </ul>
+    </section>
+  </main>
 
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
+
 </html>
