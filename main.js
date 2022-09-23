@@ -8,6 +8,24 @@ const removeItem = (child, id) => {
     tasksDOM.removeChild(child)
 };
 
+const markCompleted = (taskIcon, text, id) => {
+    const replacedIcon = document.createElement('img');
+    replacedIcon.src = './images/icon-check.svg';
+    replacedIcon.classList.add('task-check-status');
+
+    taskIcon.replaceWith(replacedIcon);
+    text.classList.add('completed-text');
+
+    let todoArray = JSON.parse(localStorage.getItem('todos'));
+    todoArray = todoArray.map(item => {
+        if (item.id === id) {
+            return { ...item, status: 'Completed'}
+        }
+        return item;
+    });
+    localStorage.setItem('todos', JSON.stringify(todoArray));
+}
+
 const createTaskItemElement = (item) => {
     const li = document.createElement('li');
     const content = document.createElement('span');
@@ -26,7 +44,10 @@ const createTaskItemElement = (item) => {
 
     li.classList.add('task-list-item');
     content.classList.add('content');
-    text.innerHTML = item.content
+    text.innerHTML = item.content;
+    if (item.status === 'Completed') {
+        text.classList.add('completed-status');
+    }
     remove.src = './images/icon-cross.svg';
     content.appendChild(taskIcon);
     content.appendChild(text);
@@ -34,13 +55,14 @@ const createTaskItemElement = (item) => {
     li.appendChild(remove);
     li.dataset.id = item.id;
     
+    taskIcon.addEventListener('click', () => markCompleted(taskIcon, text, item.id));
     remove.addEventListener('click', () => removeItem(li, item.id));
     return li;
 };
 
 const loadTasks = () => {
     const todoArray = JSON.parse(localStorage.getItem('todos'));
-    todoArray.forEach(item => {
+    todoArray?.forEach(item => {
         const taskItemDOM = createTaskItemElement(item);
         tasksDOM.appendChild(taskItemDOM);
     });
