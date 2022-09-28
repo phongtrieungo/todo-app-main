@@ -1,11 +1,18 @@
 const newTodoInput = document.querySelector('#new-todo-input');
 const tasksDOM = document.body.querySelector('#tasks');
+const filterSection = document.body.querySelector('#filter-section');
+const filterList = document.body.querySelectorAll('.item');
+const numberOfLeftItem = document.body.querySelector('#clear-item-left');
+const clearCompleted = document.body.querySelector('#clear-completed');
 
 const removeItem = (child, id) => {
     let todoArray = JSON.parse(localStorage.getItem('todos'));
     todoArray = todoArray.filter(item => item.id !== id);
     localStorage.setItem('todos', JSON.stringify(todoArray));
-    tasksDOM.removeChild(child)
+    tasksDOM.removeChild(child);
+    if (!todoArray.length) {
+        filterSection.classList.add('hide');
+    }
 };
 
 const markCompleted = (taskIcon, text, id) => {
@@ -14,7 +21,7 @@ const markCompleted = (taskIcon, text, id) => {
     replacedIcon.classList.add('task-check-status');
 
     taskIcon.replaceWith(replacedIcon);
-    text.classList.add('completed-text');
+    text.classList.add('completed-status');
 
     let todoArray = JSON.parse(localStorage.getItem('todos'));
     todoArray = todoArray.map(item => {
@@ -33,7 +40,7 @@ const createTaskItemElement = (item) => {
     const remove = document.createElement('img');
     let taskIcon = null;
 
-    if (item.status === 'New') {
+    if (item.status === 'Active') {
         taskIcon = document.createElement('span');
         taskIcon.classList.add('circle')
     } else {
@@ -60,20 +67,40 @@ const createTaskItemElement = (item) => {
     return li;
 };
 
-const loadTasks = () => {
+const loadTasks = (status = 'All') => {
     const todoArray = JSON.parse(localStorage.getItem('todos'));
-    todoArray?.forEach(item => {
-        const taskItemDOM = createTaskItemElement(item);
-        tasksDOM.appendChild(taskItemDOM);
-    });
+    if (todoArray.length) {
+        filterSection.classList.remove('hide');
+        numberOfLeftItem.innerHTML = todoArray.filter(item => item.status === 'Active').length.toString();
+    } else {
+        filterSection.classList.add('hide');
+        numberOfLeftItem.innerHTML = todoArray.length.toString();
+    }
 
+    while(tasksDOM.firstChild) {
+        tasksDOM.removeChild(tasksDOM.firstChild);
+    }
+    
+    todoArray?.forEach(item => {
+        if (status === 'All') {
+            const taskItemDOM = createTaskItemElement(item);
+            tasksDOM.appendChild(taskItemDOM);
+            return;
+        }
+
+        if (item.status === status) {
+            const taskItemDOM = createTaskItemElement(item);
+            tasksDOM.appendChild(taskItemDOM);
+        } 
+    });
+    
 };
 
 newTodoInput.addEventListener('keydown', (event) => {
     if (event.keyCode == 13) {
         let newTodo = {
             content: newTodoInput.value,
-            status: 'New'
+            status: 'Active'
         };
 
         if (localStorage.getItem('todos')) {
@@ -92,7 +119,30 @@ newTodoInput.addEventListener('keydown', (event) => {
         }
 
         newTodoInput.value = '';
+        filterSection.classList.remove('hide');
     }
+});
+
+filterList.forEach(filterItem => {
+    filterItem.addEventListener('click', e => {
+        filterList.forEach(item => item.classList.remove('text-primary'));
+        filterItem.classList.add('text-primary');
+        loadTasks(e.target.innerHTML);
+    });
+});
+
+clearCompleted.addEventListener('click', () => {
+    const todoArray = JSON.parse(localStorage.getItem('todos')).filter(item => item.status === 'Active');
+    while(tasksDOM.firstChild) {
+        tasksDOM.removeChild(tasksDOM.firstChild);
+    }
+    
+    todoArray?.forEach(item => {
+        const taskItemDOM = createTaskItemElement(item);
+        tasksDOM.appendChild(taskItemDOM);
+    });
+
+    localStorage.setItem('todos', JSON.stringify(todoArray));
 });
 
 loadTasks();

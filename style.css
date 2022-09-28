@@ -7,6 +7,7 @@
     --light-grayish-blue: hsl(233, 11%, 84%);
     --dark-grayish-blue: hsl(236, 9%, 61%);
     --more-dark-grayish-blue: hsl(235, 19%, 35%);
+    --box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 [color-scheme="light"] {
@@ -171,7 +172,7 @@ body {
 
 .task-list {
     list-style: none;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: var(--box-shadow);
     transform: translateY(-30px);
     display: grid;
     grid-template-columns: 1fr minmax(300px, 2fr) 1fr;
@@ -209,39 +210,32 @@ body {
     border-bottom: 1px solid var(--dark-grayish-blue);
 }
 
-.clear-section {
-    display: flex;
+.filter-section, .clear-section {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 2fr) 1fr;
     width: 100%;
-    justify-content: space-between;
-    background-color: #FFF;
-    align-items: center;
-    grid-column-start: 2;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 8px;
-    padding: 20px 10px;
-    margin-bottom: 5px;
 }
 
-.filter-section {
-    display: flex;
-    padding: 20px 0;
-    justify-content: center;
-    background-color: #FFF;
-    margin: auto;
-    width: 100%;
-    align-items: center;
-    grid-column-start: 2;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 8px;
-}
-
-.filter {
+.filter, .clear {
     display: flex;
     list-style: none;
+    padding: 20px 10px;
+    background-color: #FFF;
     color: var(--dark-grayish-blue);
+    box-shadow: var(--box-shadow);
+    border-radius: 8px;
+    grid-column-start: 2;
 }
 
-.filter .item:hover {
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.filter .item:hover, .clear-completed:hover {
     cursor: pointer;
     color: var(--more-dark-grayish-blue);
 }
@@ -250,6 +244,15 @@ body {
     margin: 0 20px;
 }
 
-.completed-text {
+.completed-status {
     text-decoration: line-through;
+    opacity: .5;
+}
+
+.hide {
+    display: none;
+}
+
+.text-primary {
+    color: var(--primary-bright-blue);;
 }
